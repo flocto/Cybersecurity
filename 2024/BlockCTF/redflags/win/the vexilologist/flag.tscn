@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Shader" path="res://flag.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://c2m78fell0vq7" path="res://flag_enabled.png" id="2"]
+
+[sub_resource type="GDScript" id="1"]
+script/source = "extends StaticBody2D
+class_name Flag
+
+const TRANSITION_TICKS = 100
+var target_state = true
+var is_transitioning = false
+@export var current_state = 1.0
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	%FlagSprite.material = %FlagSprite.material.duplicate()
+	%FlagSprite.material.set_shader_parameter(\"state\", current_state)
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if is_transitioning:
+		%FlagSprite.material.set_shader_parameter(\"state\", current_state)
+		if target_state:
+			current_state += 1.0/TRANSITION_TICKS
+			if current_state >= 1:
+				current_state = 1
+				is_transitioning = false
+		else:
+			current_state -= 1.0/TRANSITION_TICKS
+			if current_state <= 0:
+				current_state = 0
+				is_transitioning = false
+
+func _on_area_2d_body_entered(body):
+	is_transitioning = true
+	target_state = not target_state
+	pass
+"
+
+[sub_resource type="ShaderMaterial" id="2"]
+shader = ExtResource("1")
+shader_parameter/state = 0.0
+script = null
+
+[sub_resource type="GDScript" id="3"]
+script/source = "extends Area2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(3933, 4005)
+script = null
+
+[node name="Flag" type="StaticBody2D"]
+script = SubResource("1")
+
+[node name="FlagSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("2")
+texture = ExtResource("2")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = SubResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(22.5, -65.5)
+shape = SubResource("4")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

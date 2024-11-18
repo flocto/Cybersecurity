@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c2m78fell0vq7"
+path="res://.godot/imported/flag_enabled.png-84e714219069fe467d230019c3c5a538.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://flag_enabled.png"
+dest_files=PackedStringArray("res://.godot/imported/flag_enabled.png-84e714219069fe467d230019c3c5a538.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

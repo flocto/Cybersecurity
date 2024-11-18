@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cm1n6ybdn3qlj"
+path="res://.godot/imported/floor.png-d43f03cb7a8f42941311ed90ed2021b9.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://floor.png"
+dest_files=PackedStringArray("res://.godot/imported/floor.png-d43f03cb7a8f42941311ed90ed2021b9.ctex")
+
+[params]
+
+dummy_value_ignore_me=0
